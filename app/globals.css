@@ -29,18 +29,6 @@
 }
 
 @layer base {
-  :root {
-    /* Trilho de rolagem da hero 3D. A sequência é a mesma nos dois tamanhos,
-       só mais comprimida no celular — nenhum beat é cortado. */
-    --trilho-hero: 240svh;
-  }
-
-  @media (min-width: 768px) {
-    :root {
-      --trilho-hero: 380svh;
-    }
-  }
-
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
