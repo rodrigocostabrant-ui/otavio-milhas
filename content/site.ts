@@ -79,10 +79,23 @@ export const hero = {
   seloNumero: "+5 milhões",
   seloTexto: "de milhas negociadas",
   seloDesde: "desde 2021",
-  foto: pendente(
-    "Foto de viagem para o topo da página",
-    "Rodrigo vai fornecer fotos reais das viagens do Otávio",
-  ) as Talvez<Foto>,
+  /** Única pista na tela durante o beat de vazio da hero. Sem ele, off-white
+   *  vazio parece página quebrada em vez de respiro. */
+  rolagem: "Role para decolar",
+  /**
+   * O quadro parado da hero: o que aparece com `prefers-reduced-motion`, sem
+   * JS, em conexão de economia e se a sequência falhar.
+   *
+   * É um quadro do clipe de decolagem, não uma foto das viagens do Otávio — o
+   * alt diz o que a imagem mostra e nada além disso. As fotos reais dele
+   * continuam pendentes em `otavio.fotoViagem` e `otavio.retrato`.
+   */
+  poster: {
+    src: "/hero/poster.jpg",
+    alt: "Asa de avião sobre um tapete de nuvens, vista pela janela da cabine.",
+    largura: 1280,
+    altura: 720,
+  } satisfies Foto,
 } as const;
 
 export const virada = {

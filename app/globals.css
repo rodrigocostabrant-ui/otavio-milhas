@@ -29,6 +29,25 @@
 }
 
 @layer base {
+  :root {
+    /* Trilho de rolagem da hero. A sequência é a mesma nos dois tamanhos, só
+       mais comprimida no celular — nenhum beat é cortado. */
+    --trilho-hero: 240svh;
+
+    /* Onde a máscara do quadro começa a apagar. A borda de baixo nunca é dura:
+       o vídeo desvanece no fundo da página em vez de terminar numa linha.
+       Espelha MASCARA_INFERIOR em components/hero-video/beats.ts, que é quem
+       manda: o Palco reescreve esta variável no elemento a cada montagem. Este
+       valor é só a rede de segurança se o componente não chegar a montar. */
+    --hero-mascara: 78%;
+  }
+
+  @media (min-width: 768px) {
+    :root {
+      --trilho-hero: 380svh;
+    }
+  }
+
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
@@ -101,4 +120,255 @@
   background-size: 2px 12px;
   background-repeat: repeat-y;
   width: 2px;
+}
+
+/* ==================================================================== */
+/* Hero cinemática — a sequência de quadros dirigida por rolagem         */
+/* ==================================================================== */
+
+/**
+ * O HTML servido é a hero ESTÁTICA: pôster, altura de tela normal, todos os
+ * textos visíveis ao mesmo tempo, sem trilho e sem sticky.
+ *
+ * O JS liga a sequência opt-in, escrevendo `data-hero-modo="sequencia"` no
+ * <html> — e faz isso num script inline no topo da página, antes do primeiro
+ * paint. Consequência: sem JS, com `prefers-reduced-motion`, em modo de
+ * economia de dados, em 2g ou se os quadros falharem, a hero estática é o que
+ * fica — sem flash, sem duplicar markup e sem regra de CSS repetida para cada
+ * caso. Há um `<h1>` só na página, e ele é o mesmo nos dois modos.
+ *
+ * Estas regras ficam FORA de @layer de propósito: são o comportamento do
+ * componente, não utilitários, e precisam de precedência previsível sobre as
+ * classes do Tailwind nos mesmos elementos.
+ */
+
+:root[data-hero-modo="sequencia"] [data-hero-raiz] {
+  height: var(--trilho-hero);
+}
+
+:root[data-hero-modo="sequencia"] [data-hero-miolo] {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 0;
+}
+
+/* A abertura em grande angular. Os três valores são escritos inline a cada
+   frame; o padrão é a fresta fechada, que é o estado em t = 0. */
+:root[data-hero-modo="sequencia"] [data-hero-abertura] {
+  clip-path: inset(
+    var(--ab-topo, 50%) var(--ab-lado, 22.5%) round var(--ab-raio, 40px)
+  );
+}
+
+/* Depois de abrir, o clip sai de cena: recortar a tela inteira a cada frame
+   custa um repaint que não compõe na GPU, e a partir daqui não recorta nada. */
+:root[data-hero-modo="sequencia"] [data-hero-abertura][data-aberto] {
+  clip-path: none;
+}
+
+:root[data-hero-modo="sequencia"] [data-hero-poster] {
+  display: none;
+}
+
+/* A dica de rolagem e a barra de carga ficam sempre montadas — condicionar a
+   montagem ao modo divergiria do HTML do servidor na hidratação. Quem as
+   esconde é o CSS. */
+[data-hero-indicador] {
+  display: none;
+}
+
+:root[data-hero-modo="sequencia"] [data-hero-indicador] {
+  display: flex;
+}
+
+:root[data-hero-modo="sequencia"] [data-bloco] {
+  opacity: 0;
+  /* `visibility` tira do foco e do leitor de tela junto com a opacidade — mas
+     mantém a caixa, o que é o que faz o BotaoFlutuante continuar achando o
+     #hero-cta. */
+  visibility: hidden;
+  will-change: opacity, transform;
+}
+
+/* Os três blocos narrativos se revezam na mesma âncora. Só na sequência: no
+   modo estático eles empilham em fluxo, um debaixo do outro. */
+:root[data-hero-modo="sequencia"] [data-hero-pilha] > [data-bloco] {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+}
+
+/**
+ * Máscara do quadro. Cobre o canvas E os scrims, no mesmo elemento: se só o
+ * vídeo desvanecesse, o scrim escuro continuaria até a borda e viraria uma
+ * faixa cinza sobre o off-white. Desvanecendo juntos, a imagem inteira dissolve
+ * no fundo da página.
+ */
+[data-hero-quadro] {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black 0 var(--hero-mascara),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    black 0 var(--hero-mascara),
+    transparent 100%
+  );
+}
+
+/**
+ * Legibilidade em três camadas, não um scrim chapado.
+ *
+ * As paradas não são estéticas: medi a luminância do clipe quadro a quadro e o
+ * pior caso na faixa do texto é nuvem branca pura (Y′ = 255). Sobre branco,
+ * texto branco precisa de 50% de `--color-ink` para passar em AA como texto
+ * grande (3:1) e de 62% como texto corrido (4.5:1).
+ *
+ * A primeira versão tinha só o degradê vertical, e não bastou: o `<h1>` tem
+ * três linhas e o topo dele cai perto da metade da altura, onde o vertical
+ * ainda está fraco — e ali o fundo não é céu liso, é a fuselagem com a
+ * pintura da companhia. Ficou ilegível na tela, mesmo com a conta fechando no
+ * papel. A camada que resolve é a lateral: escurece a coluna onde o texto mora
+ * e deixa o resto do quadro limpo, que é o tratamento de qualquer letreiro de
+ * cinema. Duas camadas sobrepostas se somam por 1−(1−a₁)(1−a₂), então no canto
+ * superior esquerdo do `<h1>` dá ~0,81 (9:1) e na ponta direita da linha mais
+ * larga ~0,69 (6:1).
+ *
+ * No topo o pior caso medido é Y′ = 234 (céu de haze), e 62% ali dá 5,1:1 para
+ * a navegação branca do header imersivo.
+ */
+[data-hero-scrim="topo"] {
+  background-image: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--color-ink) 62%, transparent) 0%,
+    color-mix(in srgb, var(--color-ink) 22%, transparent) 9%,
+    transparent 18%
+  );
+}
+
+[data-hero-scrim="base"] {
+  background-image: linear-gradient(
+    to bottom,
+    transparent 22%,
+    color-mix(in srgb, var(--color-ink) 24%, transparent) 36%,
+    color-mix(in srgb, var(--color-ink) 53%, transparent) 50%,
+    color-mix(in srgb, var(--color-ink) 68%, transparent) 62%,
+    color-mix(in srgb, var(--color-ink) 76%, transparent) 74%,
+    color-mix(in srgb, var(--color-ink) 78%, transparent) 100%
+  );
+}
+
+/* A coluna do texto. Em `%` de propósito: no celular o texto ocupa a largura
+   toda e a faixa acompanha; no desktop ela morre antes da metade direita, que
+   é onde o quadro fica limpo. */
+[data-hero-scrim="coluna"] {
+  background-image: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--color-ink) 62%, transparent) 0%,
+    color-mix(in srgb, var(--color-ink) 50%, transparent) 34%,
+    color-mix(in srgb, var(--color-ink) 20%, transparent) 62%,
+    transparent 84%
+  );
+}
+
+/* Sombra de segurança sob o texto. Não conta para o WCAG — os scrims acima é
+   que fazem a conta fechar — mas resolve o pixel isolado de nuvem estourada. */
+[data-hero-texto] :where(h1, p, span, strong) {
+  text-shadow: 0 1px 18px color-mix(in srgb, var(--color-ink) 45%, transparent);
+}
+
+/* ==================================================================== */
+/* Header sobre a hero                                                   */
+/* ==================================================================== */
+
+/**
+ * Três estados, porque dois não bastam:
+ *
+ *  - `vazio`: o fundo é off-white e um logo branco seria invisível, então o
+ *    header simplesmente não existe. É o que faz a abertura limpa valer.
+ *  - `imersivo`: há imagem atrás. Sem fundo, sem borda, logo branco, navegação
+ *    branca e o CTA em contorno branco — `--color-accent-strong` é um laranja
+ *    escuro feito para fundo claro e desaparece sobre o scrim.
+ *  - `normal`: o header materializa junto com a dissolução.
+ */
+
+[data-hero-fase] header {
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    opacity 200ms ease;
+}
+
+:root[data-hero-fase="vazio"] header {
+  opacity: 0;
+  pointer-events: none;
+}
+
+:root[data-hero-fase="vazio"] header,
+:root[data-hero-fase="imersivo"] header {
+  background-color: transparent;
+  border-color: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+:root[data-hero-fase="imersivo"] header a,
+:root[data-hero-fase="imersivo"] header a:hover {
+  color: var(--color-ink-inverse);
+}
+
+:root[data-hero-fase="imersivo"] header a[data-variante="contorno"] {
+  border-color: color-mix(in srgb, var(--color-ink-inverse) 45%, transparent);
+}
+
+:root[data-hero-fase="imersivo"] header a[data-variante="contorno"]:hover {
+  border-color: var(--color-ink-inverse);
+  background-color: color-mix(
+    in srgb,
+    var(--color-ink-inverse) 14%,
+    transparent
+  );
+}
+
+/* O logo branco existe no repo justamente para isto. Os dois ficam montados e
+   só a opacidade troca — `src` condicional causaria um request no meio da
+   rolagem. */
+[data-logo] {
+  transition: opacity 200ms ease;
+}
+
+[data-logo="claro"] {
+  opacity: 0;
+}
+
+:root[data-hero-fase="vazio"] [data-logo="claro"],
+:root[data-hero-fase="imersivo"] [data-logo="claro"] {
+  opacity: 1;
+}
+
+:root[data-hero-fase="vazio"] [data-logo="escuro"],
+:root[data-hero-fase="imersivo"] [data-logo="escuro"] {
+  opacity: 0;
+}
+
+/**
+ * A única animação não disparada pelo usuário na página. Existe para uma coisa
+ * só: dizer "role" numa tela deliberadamente vazia. O bloco de
+ * `prefers-reduced-motion` em @layer base já zera a duração — e quem pediu
+ * menos movimento recebe a hero estática, sem indicador nenhum.
+ */
+@keyframes hero-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+.hero-bob {
+  animation: hero-bob 2.2s ease-in-out infinite;
 }

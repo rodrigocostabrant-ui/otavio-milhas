@@ -39,6 +39,9 @@ export function WhatsAppLink({
       href={linkWhats(contexto)}
       target="_blank"
       rel="noopener noreferrer"
+      /* O header imersivo repinta o contorno de branco: sobre a imagem,
+         `accent-strong` é um laranja escuro demais para ser lido. */
+      data-variante={variante}
       className={`inline-flex items-center justify-center gap-2.5 rounded-full font-medium transition-colors duration-200 ${variantes[variante]} ${tamanhos[tamanho]} ${className}`}
     >
       <IconeWhatsApp className="h-[18px] w-[18px] shrink-0" />

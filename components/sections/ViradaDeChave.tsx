@@ -2,10 +2,23 @@ import { virada } from "@/content/site";
 import { Reveal } from "@/components/ui/Reveal";
 import { IconeCheck, IconeMenos } from "@/components/ui/Icones";
 
+/**
+ * A seção que emerge do branco da hero.
+ *
+ * Sem borda no topo e com respiro maior que as outras, de propósito: a hero
+ * termina com um véu de `--color-bg` e uma linha de 1px ali viraria a costura
+ * que a dissolução existe para não ter. A faixa de degradê resolve o resto — a
+ * seção é `--color-surface` (branco puro) e a hero acaba em `--color-bg`
+ * (off-white), e sem a transição o encontro das duas seria um degrau visível.
+ */
 export function ViradaDeChave() {
   return (
-    <section className="border-t border-border/70 bg-surface">
-      <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
+    <section className="relative bg-surface">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-48 bg-linear-to-b from-bg to-transparent"
+      />
+      <div className="relative mx-auto max-w-6xl px-5 pt-24 pb-16 sm:px-8 sm:pt-36 sm:pb-24">
         <Reveal>
           <p className="rotulo text-accent-strong">{virada.rotulo}</p>
           <h2 className="mt-5 max-w-[24ch] font-display text-[clamp(1.75rem,4vw,2.75rem)] leading-[1.12] font-bold tracking-[-0.02em] text-balance">

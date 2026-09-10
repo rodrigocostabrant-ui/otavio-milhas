@@ -46,7 +46,15 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" className={`${display.variable} ${corpo.variable}`}>
+    /* `suppressHydrationWarning` porque a hero escreve `data-hero-modo` e
+       `data-hero-fase` aqui num script inline, antes da hidratação — é o mesmo
+       padrão de um seletor de tema. O aviso é sobre exatamente esses atributos,
+       e a supressão é rasa: vale para o <html> e não para a árvore abaixo. */
+    <html
+      lang="pt-BR"
+      suppressHydrationWarning
+      className={`${display.variable} ${corpo.variable}`}
+    >
       <body>{children}</body>
     </html>
   );
