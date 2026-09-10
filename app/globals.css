@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+/**
+ * Tokens da marca Otávio Milhas.
+ *
+ * Nomeados por papel, nunca por cor. Nenhum componente escreve cor literal.
+ * Ver docs/superpowers/specs/2026-09-09-landing-otavio-milhas-design.md §5.
+ *
+ * REGRA DURA: --color-accent (#FF5A00, o laranja do logo) NUNCA carrega texto
+ * pequeno. Branco sobre ele dá 2.9:1 e reprova em AA. Todo botão preenchido com
+ * texto branco usa --color-accent-strong (4.9:1). O laranja puro vive em traço,
+ * ícone, o avião, o rastro tracejado e sobre fundo escuro.
+ */
+@theme {
+  --color-bg: #faf8f5;
+  --color-surface: #ffffff;
+  --color-border: #e7e1d9;
+  --color-ink: #1c1b1a;
+  --color-ink-soft: #3a3733;
+  --color-ink-muted: #5c5750;
+  --color-accent: #ff5a00;
+  --color-accent-strong: #c2410c;
+  --color-accent-hover: #9a3412;
+  --color-accent-soft: #fff1e8;
+  --color-ink-inverse: #ffffff;
+
+  --font-display: var(--fonte-display), ui-sans-serif, system-ui, sans-serif;
+  --font-corpo: var(--fonte-corpo), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-corpo);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-ink-inverse);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent-strong);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/**
+ * Rótulo de seção. Replica o "MILHAS" do logo — caixa alta, tracking largo.
+ * É a assinatura tipográfica que amarra a página à marca.
+ */
+@utility rotulo {
+  font-family: var(--font-corpo);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+/** Rastro tracejado do avião do logo, usado como divisória e conector. */
+@utility rastro-h {
+  background-image: linear-gradient(
+    to right,
+    var(--color-accent) 0 6px,
+    transparent 6px 12px
+  );
+  background-size: 12px 2px;
+  background-repeat: repeat-x;
+  height: 2px;
+}
+
+@utility rastro-v {
+  background-image: linear-gradient(
+    to bottom,
+    var(--color-accent) 0 6px,
+    transparent 6px 12px
+  );
+  background-size: 2px 12px;
+  background-repeat: repeat-y;
+  width: 2px;
+}
