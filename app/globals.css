@@ -123,6 +123,37 @@
 }
 
 /* ==================================================================== */
+/* Entrada ao rolar                                                      */
+/* ==================================================================== */
+
+/**
+ * O conteúdo NASCE visível. O estado escondido só existe sob `data-anima`, que
+ * `components/ui/AtivarAnimacoes.tsx` escreve antes do primeiro paint e só
+ * quando há JS e movimento permitido.
+ *
+ * A inversão é o ponto: entregar `opacity: 0` no HTML e contar com o JS para
+ * desfazer some com a página inteira quando o JS não vem — e `Reveal` embrulha
+ * as oito seções de conteúdo. Escrever o atributo é a prova de que existe
+ * alguém vivo para revelar de volta.
+ *
+ * Fora de @layer pelo mesmo motivo das regras da hero: é comportamento de
+ * componente e precisa de precedência previsível sobre as classes do Tailwind
+ * nos mesmos elementos.
+ */
+:root[data-anima="sim"] [data-revelar] {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 220ms cubic-bezier(0.22, 0.61, 0.36, 1) var(--revelar-atraso, 0s),
+    transform 220ms cubic-bezier(0.22, 0.61, 0.36, 1) var(--revelar-atraso, 0s);
+}
+
+:root[data-anima="sim"] [data-revelar][data-visivel] {
+  opacity: 1;
+  transform: none;
+}
+
+/* ==================================================================== */
 /* Hero cinemática — a sequência de quadros dirigida por rolagem         */
 /* ==================================================================== */
 
