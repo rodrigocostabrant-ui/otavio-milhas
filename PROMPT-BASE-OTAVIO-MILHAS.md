@@ -128,6 +128,10 @@ pela experiência pessoal ("aprenda com quem já fez").
 
 1. **Hero** — logo + nav enxuta, headline forte no tom atual, sub, CTA de
    WhatsApp, e um selo de prova ("+5 milhões de milhas negociadas desde 2021").
+   ⚠️ **Faça a hero simples e estática nesta rodada.** Ela vai ser substituída
+   por uma sequência cinemática em 3D dirigida por rolagem, já especificada em
+   `PROMPT-HERO-3D.md` (rodada seguinte). Não invista em efeito de hero agora, e
+   deixe a seção isolada num componente próprio, fácil de trocar inteiro.
 2. **A virada de chave** — o bloco "milhões pagam caro / outros usam milhas":
    contraste entre quem paga passagem cheia e quem viaja com milhas.
 3. **O que você vai aprender** — 4 a 6 pilares do método (acumular no dia a dia,
