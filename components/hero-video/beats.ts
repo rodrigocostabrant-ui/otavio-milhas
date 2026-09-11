@@ -202,6 +202,33 @@ export function indicadorPara(t: number): number {
   return 1 - suave(faixa(t, INDICADOR.sai[0], INDICADOR.sai[1]));
 }
 
+/**
+ * O logo e a tagline durante o vazio.
+ *
+ * Off-white liso sem imagem nem texto lê como página quebrada, não como
+ * respiro — o indicador de rolagem sozinho não segura a tela. O logo (colorido,
+ * sobre o off-white) e a tagline (`hero.headlineInicio` + `headlineDestaque`,
+ * o mesmo texto do `<h1>`, em tinta escura) ocupam o centro enquanto nada mais
+ * existe.
+ *
+ * Só a saída é dirigida por `t`: a entrada é uma animação de CSS no montar
+ * (`.hero-marca-entra`), porque em `t = 0` — antes de qualquer rolagem — o
+ * bloco precisa já estar na tela. Começa em 1 e some, exatamente como o
+ * `indicadorPara`.
+ *
+ * A saída cabe inteira dentro do beat de vazio (`BEATS.vazio`): o bloco some
+ * antes de a abertura em grande angular começar. É a regra mais limpa — a
+ * marca pertence ao vazio e a mais nada, e nunca há um quadro com a fresta
+ * (que abre do centro, exatamente onde o bloco vive) por cima da tinta escura
+ * da tagline. Há teste amarrando `sai[1]` ao começo da abertura. O fade
+ * acontece com a pessoa já rolando, então o movimento o disfarça.
+ */
+export const MARCA_VAZIO = { sai: [0.02, 0.06] } as const;
+
+export function marcaVazioPara(t: number): number {
+  return 1 - suave(faixa(t, MARCA_VAZIO.sai[0], MARCA_VAZIO.sai[1]));
+}
+
 /* ------------------------------------------------------------------ */
 /* 5. A dissolução final                                               */
 /* ------------------------------------------------------------------ */

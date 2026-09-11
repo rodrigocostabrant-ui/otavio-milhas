@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import { headerPara, type ModoDeHeader } from "./beats";
 import { CamadaDeTexto } from "./CamadaDeTexto";
 import { Indicador } from "./Indicador";
+import { MarcaVazio } from "./MarcaVazio";
 import { Palco } from "./Palco";
 import { HeroProgressoProvider, useHeroProgresso } from "./progresso";
 import { useCapacidade } from "./capacidade";
@@ -88,6 +89,8 @@ export function HeroVideo() {
             <Sequencia aoProgresso={aoProgresso} aoFalhar={desligar} />
           ) : null}
         </Palco>
+
+        <MarcaVazio />
 
         <CamadaDeTexto />
 

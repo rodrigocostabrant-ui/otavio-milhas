@@ -5,12 +5,14 @@ import {
   BLOCOS,
   BLOCOS_NARRATIVOS,
   DISSOLUCAO,
+  MARCA_VAZIO,
   TEXTO,
   VOO,
   aberturaPara,
   bloomPara,
   indicadorPara,
   janelaDeTexto,
+  marcaVazioPara,
   progresso,
   quadroPara,
   recorteDeCobertura,
@@ -290,6 +292,41 @@ describe("dissolução no off-white", () => {
 
   it("começa a dissolver só depois do voo ter gastado o último quadro", () => {
     expect(VOO.fim).toBe(BEATS.dissolucao[0]);
+  });
+});
+
+describe("marca no beat de vazio", () => {
+  it("está inteira na tela em t=0, que é onde a página não pode parecer quebrada", () => {
+    expect(marcaVazioPara(0)).toBeCloseTo(1, 6);
+    expect(marcaVazioPara(BEATS.vazio[0])).toBeCloseTo(1, 6);
+  });
+
+  it("sai antes de o `<h1>` da decolagem entrar — nunca dois blocos de texto ao mesmo tempo", () => {
+    expect(MARCA_VAZIO.sai[1]).toBeLessThanOrEqual(TEXTO.headline.entra[0]);
+    expect(marcaVazioPara(TEXTO.headline.entra[0])).toBe(0);
+  });
+
+  it("some antes de a abertura em grande angular começar", () => {
+    // A fresta abre do centro — exatamente onde o bloco vive. Se ele ainda
+    // estivesse lá, seria imagem escura por cima da tinta escura da tagline.
+    // A marca pertence ao beat de vazio e a mais nada.
+    expect(MARCA_VAZIO.sai[1]).toBeLessThanOrEqual(BEATS.abertura[0]);
+    expect(marcaVazioPara(BEATS.abertura[0])).toBe(0);
+  });
+
+  it("só diminui", () => {
+    let anterior = Infinity;
+    for (const t of amostras()) {
+      const o = marcaVazioPara(t);
+      expect(o).toBeLessThanOrEqual(anterior + 1e-9);
+      anterior = o;
+    }
+  });
+
+  it("não reacende mais tarde na sequência", () => {
+    for (const t of amostras(MARCA_VAZIO.sai[1], 1, 0.002)) {
+      expect(marcaVazioPara(t)).toBe(0);
+    }
   });
 });
 
