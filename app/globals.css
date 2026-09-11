@@ -31,8 +31,14 @@
 @layer base {
   :root {
     /* Trilho de rolagem da hero. A sequência é a mesma nos dois tamanhos, só
-       mais comprimida no celular — nenhum beat é cortado. */
-    --trilho-hero: 240svh;
+       mais comprimida no celular — nenhum beat é cortado.
+
+       É a alavanca de "mais devagar": alongar o trilho faz o mesmo voo (120
+       quadros, extraídos a 12fps) consumir mais pixels de rolagem por quadro,
+       sem mudar quadro nenhum. Subiu de 240/380 para aproximar a cadência da
+       do clipe de origem. A fluidez em flick rápido é do lerp (`AMORTECIMENTO`
+       em beats.ts), não daqui. */
+    --trilho-hero: 360svh;
 
     /* Onde a máscara do quadro começa a apagar. A borda de baixo nunca é dura:
        o vídeo desvanece no fundo da página em vez de terminar numa linha.
@@ -44,7 +50,7 @@
 
   @media (min-width: 768px) {
     :root {
-      --trilho-hero: 380svh;
+      --trilho-hero: 480svh;
     }
   }
 
