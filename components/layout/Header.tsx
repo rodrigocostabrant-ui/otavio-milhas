@@ -27,8 +27,8 @@ export function Header() {
             data-logo="escuro"
             src="/img/logo-otavio.png"
             alt={marca.nome}
-            width={400}
-            height={221}
+            width={299}
+            height={165}
             loading="eager"
             className="h-9 w-auto sm:h-10"
           />
@@ -37,8 +37,8 @@ export function Header() {
             src="/img/logo-otavio-branco.png"
             alt=""
             aria-hidden="true"
-            width={400}
-            height={221}
+            width={299}
+            height={165}
             loading="eager"
             className="absolute inset-0 h-9 w-auto sm:h-10"
           />
