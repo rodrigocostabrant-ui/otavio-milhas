@@ -24,12 +24,17 @@ export function Imagem({
   prioridade = false,
   sizes = "100vw",
   className = "",
+  preencher = false,
 }: {
   foto: Talvez<Foto>;
   proporcao?: keyof typeof proporcoes;
   prioridade?: boolean;
   sizes?: string;
   className?: string;
+  /** Sangra pelo pai (`absolute inset-0`, `object-cover`) em vez de reservar
+   *  a própria caixa por `proporcao` — para foto de fundo de seção, não de
+   *  painel. O pai precisa ser `relative` e ter altura própria. */
+  preencher?: boolean;
 }) {
   if (isPendente(foto)) {
     garantirProtótipo(foto.label);
@@ -37,7 +42,7 @@ export function Imagem({
     return (
       <div
         role="note"
-        className={`flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-accent/35 bg-accent-soft/50 px-6 py-10 text-center ${proporcoes[proporcao]} ${className}`}
+        className={`flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-accent/35 bg-accent-soft/50 px-6 py-10 text-center ${preencher ? "absolute inset-0 m-auto h-fit max-w-md" : proporcoes[proporcao]} ${className}`}
       >
         <IconeAviao className="h-7 w-7 text-accent/70" />
         <span className="rotulo text-accent-strong">Imagem a receber</span>
@@ -50,6 +55,19 @@ export function Imagem({
           </span>
         ) : null}
       </div>
+    );
+  }
+
+  if (preencher) {
+    return (
+      <NextImage
+        src={foto.src}
+        alt={foto.alt}
+        fill
+        sizes={sizes}
+        priority={prioridade}
+        className={`object-cover ${className}`}
+      />
     );
   }
 

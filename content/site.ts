@@ -69,33 +69,39 @@ export const nav = [
   { rotulo: "Dúvidas", href: "#duvidas" },
 ] as const;
 
+/**
+ * A primeira tela é só a marca: o logo e esta frase. Nada de subtítulo, selo ou
+ * botão — quem chega vê uma coisa só, e a conversa começa na tela seguinte.
+ */
 export const hero = {
-  rotulo: "Milhas aéreas · desde 2021",
-  /** Verbatim do site atual. `destaque` é renderizado em laranja. */
+  /** Verbatim do site atual. `destaque` fecha a frase em tinta cheia. */
   headlineInicio: "Aprenda as melhores estratégias para acumular milhas, viajar mais, ",
   headlineDestaque: "gastando menos.",
-  sub: "Aprenda com quem já percorreu vários países sem gastar uma fortuna em passagens aéreas.",
+} as const;
+
+/**
+ * A segunda tela da hero: a que a câmera revela por dentro do avião.
+ *
+ * É onde o Otávio aparece. Isso é a decisão §5 do AGENTS.md levada ao extremo —
+ * não há depoimento nem print de resgate, então a autoridade dele *é* a prova
+ * social, e ela chega antes de qualquer argumento.
+ *
+ * Toda a copy aqui já existia: a frase é verbatim do site dele e o apoio é o
+ * número que ele mesmo publica. Nada foi inventado para preencher a tela.
+ */
+export const heroFoto = {
+  /** O fundo sangrado desta tela. Foto de viagem, não retrato — é a mesma que
+   *  o Otávio usa lá embaixo em "Quem é o Otávio" (`otavio.fotoViagem`) faria
+   *  sentido reaproveitar, mas o Rodrigo tem fotos de viagem suficientes para
+   *  a hero merecer a dela própria. */
+  foto: pendente(
+    "Foto de viagem para o topo da página",
+    "Rodrigo tem as fotos",
+  ) as Talvez<Foto>,
+  headline:
+    "Aprenda com quem já percorreu vários países sem gastar uma fortuna em passagens aéreas.",
+  apoio: "Mais de 5 milhões de milhas negociadas desde 2021.",
   cta: "Quero aprender a viajar com milhas",
-  seloNumero: "+5 milhões",
-  seloTexto: "de milhas negociadas",
-  seloDesde: "desde 2021",
-  /** Única pista na tela durante o beat de vazio da hero. Sem ele, off-white
-   *  vazio parece página quebrada em vez de respiro. */
-  rolagem: "Role para decolar",
-  /**
-   * O quadro parado da hero: o que aparece com `prefers-reduced-motion`, sem
-   * JS, em conexão de economia e se a sequência falhar.
-   *
-   * É um quadro do clipe de decolagem, não uma foto das viagens do Otávio — o
-   * alt diz o que a imagem mostra e nada além disso. As fotos reais dele
-   * continuam pendentes em `otavio.fotoViagem` e `otavio.retrato`.
-   */
-  poster: {
-    src: "/hero/poster.jpg",
-    alt: "Asa de avião sobre um tapete de nuvens, vista pela janela da cabine.",
-    largura: 1280,
-    altura: 720,
-  } satisfies Foto,
 } as const;
 
 export const virada = {
