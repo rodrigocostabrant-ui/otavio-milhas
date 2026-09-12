@@ -1,6 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/hero/Hero";
+import { FaixaViagem } from "@/components/sections/FaixaViagem";
 import { ViradaDeChave } from "@/components/sections/ViradaDeChave";
 import { QuemEOtavio } from "@/components/sections/QuemEOtavio";
 import { Temas } from "@/components/sections/Temas";
@@ -23,6 +24,7 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
+        <FaixaViagem />
         <ViradaDeChave />
         <QuemEOtavio />
         <Temas />

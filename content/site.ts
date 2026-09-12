@@ -130,6 +130,34 @@ export const hero = {
   ] as readonly Talvez<Foto>[],
 } as const;
 
+/**
+ * A faixa de foto logo abaixo da hero.
+ *
+ * É a "foto de viagem real do Otávio, largura total, sangrada" que o `copy.md`
+ * previa para o topo da página e que tinha ficado sem lugar quando a hero virou
+ * uma tela só. Ela existe por um motivo de peso: entre a hero e "Quem é o
+ * Otávio" a página andava três seções inteiras sem uma única imagem, e uma
+ * landing de viagem que só tem texto não prova nada.
+ *
+ * A copy **não foi inventada**. As duas frases vêm da lista "Headlines
+ * alternativas para o hero" no fim do `copy.md` — foram escritas junto com o
+ * resto e só não tinham sido escolhidas para a hero. A #1 continua sendo a
+ * headline do site; estas eram a #2 e a #3, e ficavam paradas.
+ *
+ * Sem rótulo de seção de propósito: o teto da página é de três, e eles já estão
+ * no selo da hero, em "Quem vai te ensinar" e em "Quem já viajou com isso".
+ */
+export const faixaViagem = {
+  /** `copy.md`, "Headlines alternativas para o hero", alternativa 2. */
+  headline: "Você já tem as milhas para viajar. Só ainda não sabe usá-las.",
+  /** `copy.md`, "Headlines alternativas para o hero", alternativa 3. */
+  apoio: "O seu gasto de todo mês já pagou uma passagem. Vamos buscar?",
+  foto: pendente(
+    "Foto de viagem para a faixa abaixo da hero",
+    "largura total, sangrada — Rodrigo tem as fotos",
+  ) as Talvez<Foto>,
+} as const;
+
 export const virada = {
   rotulo: "A virada de chave",
   headline:

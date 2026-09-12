@@ -116,6 +116,29 @@
   text-wrap: balance;
 }
 
+/**
+ * O degradê sob o texto de uma foto sangrada, ancorado na base.
+ *
+ * A borda de uma foto de largura total nunca pode entregar o texto ao acaso da
+ * imagem: o degradê fecha em tinta cheia onde a leitura acontece e chega
+ * transparente no alto, onde a foto fica limpa.
+ *
+ * As paradas são desiguais de propósito — a queda de opacidade é lenta perto do
+ * texto e rápida longe dele. Distribuídas por igual, o meio do degradê vira uma
+ * faixa cinza visível em cima da foto.
+ */
+@utility overlay-cena {
+  background-image: linear-gradient(
+    to top,
+    var(--color-ink) 0%,
+    color-mix(in srgb, var(--color-ink) 92%, transparent) 20%,
+    color-mix(in srgb, var(--color-ink) 70%, transparent) 38%,
+    color-mix(in srgb, var(--color-ink) 40%, transparent) 56%,
+    color-mix(in srgb, var(--color-ink) 15%, transparent) 74%,
+    transparent 92%
+  );
+}
+
 /** Rastro tracejado do avião do logo, usado como divisória e conector. */
 @utility rastro-h {
   background-image: linear-gradient(

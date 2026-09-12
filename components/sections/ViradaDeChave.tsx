@@ -3,8 +3,12 @@ import { Reveal } from "@/components/ui/Reveal";
 import { IconeCheck, IconeMenos } from "@/components/ui/Icones";
 
 /**
- * A primeira seção depois da hero, e a que carrega o argumento inteiro da
- * página — por isso usa `titulo-ancora`, o degrau de cima da escala.
+ * A seção que carrega o argumento inteiro da página — por isso usa
+ * `titulo-ancora`, o degrau de cima da escala.
+ *
+ * Ela vem depois de `FaixaViagem`, a faixa de foto escura, e por isso o respiro
+ * no topo é maior que o das outras: sair de uma faixa sangrada direto para uma
+ * headline seria um degrau, não uma passagem.
  *
  * As duas colunas já não são cartões. A moldura arredondada não comunicava
  * elevação nenhuma: são duas listas lado a lado, e o que as separa é o que

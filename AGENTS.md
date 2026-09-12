@@ -90,6 +90,23 @@ avião e o rastro do próprio logo. É o único marcador da página que **não**
 aparece como moldura tracejada: decoração não é conteúdo, e uma moldura boiando
 em volta do `<h1>` seria absurda. A troca, quando a lista chegar, é de dados.
 
+## A faixa de foto abaixo da hero
+
+`FaixaViagem` é a "foto de viagem real do Otávio, largura total, sangrada" que o
+`copy.md` sempre previu e que ficou sem lugar quando a hero virou uma tela só.
+Entre a hero e "Quem é o Otávio" a página andava três seções sem uma única
+imagem, e uma landing de viagem que só tem texto não prova nada.
+
+**A copy dela não foi inventada.** As duas frases saem da lista "Headlines
+alternativas para o hero", no fim do `copy.md`: o `<h2>` é a alternativa 2 e a
+linha de apoio é a 3. Foram escritas junto com o resto e só não tinham sido
+escolhidas para a hero — a alternativa 1 continua sendo a headline do site.
+Quem for mexer nelas, mexa lá primeiro.
+
+Sem rótulo (o teto de três está gasto) e sem CTA (seria o quinto da página com a
+mesma intenção, e o botão do WhatsApp está uma tela acima). O trabalho da seção
+é a foto.
+
 ## Ritmo da página (mesma conversa)
 
 - **No máximo 3 rótulos de seção na página inteira.** Hoje: o selo da hero,
