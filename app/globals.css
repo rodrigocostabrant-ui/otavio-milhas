@@ -117,25 +117,38 @@
 }
 
 /**
- * O degradê sob o texto de uma foto sangrada, ancorado na base.
+ * O véu sob o texto de uma foto sangrada.
  *
- * A borda de uma foto de largura total nunca pode entregar o texto ao acaso da
- * imagem: o degradê fecha em tinta cheia onde a leitura acontece e chega
- * transparente no alto, onde a foto fica limpa.
+ * O trabalho dele é um só: garantir leitura sem tapar a foto. Os dois terços de
+ * cima ficam praticamente limpos — é ali que a imagem existe — e a densidade se
+ * concentra no terço de baixo, onde o texto mora.
  *
- * As paradas são desiguais de propósito — a queda de opacidade é lenta perto do
- * texto e rápida longe dele. Distribuídas por igual, o meio do degradê vira uma
- * faixa cinza visível em cima da foto.
+ * As paradas não são lineares de propósito. Distribuídas por igual, o meio do
+ * degradê vira uma faixa cinza chapada em cima da foto, visível como sujeira. A
+ * queda é lenta perto do texto e rápida longe dele.
+ *
+ * A densidade não é gosto, é medida, e o pior caso é sempre o mesmo: uma foto
+ * clara — céu, praia, neve — exatamente atrás do texto. Sobre branco puro:
+ *
+ *   - no rodapé (88% de tinta) o fundo efetivo fica em #3b3a39, e branco sobre
+ *     ele dá 10:1;
+ *   - onde o topo do `<h2>` costuma cair, a ~44% da altura, sobram ~55% de
+ *     tinta, que dá 4,0:1 — folgado para texto grande, que pede 3:1.
+ *
+ * A primeira versão era mais leve ali (40% de tinta, 2,5:1) e só não reprovava
+ * porque a foto de teste tinha o chão escuro. Véu que depende da foto dar sorte
+ * não é véu.
  */
 @utility overlay-cena {
   background-image: linear-gradient(
     to top,
-    var(--color-ink) 0%,
-    color-mix(in srgb, var(--color-ink) 92%, transparent) 20%,
-    color-mix(in srgb, var(--color-ink) 70%, transparent) 38%,
-    color-mix(in srgb, var(--color-ink) 40%, transparent) 56%,
-    color-mix(in srgb, var(--color-ink) 15%, transparent) 74%,
-    transparent 92%
+    color-mix(in srgb, var(--color-ink) 88%, transparent) 0%,
+    color-mix(in srgb, var(--color-ink) 84%, transparent) 18%,
+    color-mix(in srgb, var(--color-ink) 72%, transparent) 30%,
+    color-mix(in srgb, var(--color-ink) 58%, transparent) 42%,
+    color-mix(in srgb, var(--color-ink) 30%, transparent) 56%,
+    color-mix(in srgb, var(--color-ink) 10%, transparent) 70%,
+    transparent 84%
   );
 }
 
