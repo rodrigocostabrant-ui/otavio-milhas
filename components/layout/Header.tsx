@@ -3,44 +3,29 @@ import { marca, nav } from "@/content/site";
 import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
 
 /**
- * O header tem três aparências, e nenhuma delas é estado do React: ele lê
- * `data-hero-fase` do `<html>`, escrito pela hero. Ver o bloco "Header sobre a
- * hero" em `app/globals.css`.
- *
- * Os dois logos ficam montados e só a opacidade troca. `src` condicional
- * causaria um request no meio da rolagem, exatamente no momento em que a
- * conexão está ocupada com os quadros da sequência.
+ * Sticky, sempre visível — a marca no topo da página é o `<h1>` de
+ * `Marca.tsx`, não este logo pequeno, então não há disputa entre os dois.
  */
 export function Header() {
   return (
     <header className="sticky top-0 z-30 border-b border-border/70 bg-bg/85 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5 sm:px-8">
+      {/* A altura vem de um token porque a hero depende dela: ela sobe por
+          baixo do header exatamente esta medida. Ver `--altura-header`. */}
+      <div className="mx-auto flex h-[var(--altura-header)] max-w-6xl items-center justify-between gap-4 px-5 sm:px-8">
         <a
           href="#topo"
           className="relative shrink-0"
           aria-label={`${marca.nome} — início`}
         >
-          {/* `loading="eager"` em vez de `preload`: são dois candidatos a LCP
-              para a mesma posição, e a doc do Next 16 é explícita em não
-              pré-carregar nesse caso. */}
+          {/* Um logo só: o fundo atrás do header é sempre o off-white da
+              página — não há mais imagem escura passando por baixo dele. */}
           <Image
-            data-logo="escuro"
             src="/img/logo-otavio.png"
             alt={marca.nome}
             width={299}
             height={165}
             loading="eager"
             className="h-9 w-auto sm:h-10"
-          />
-          <Image
-            data-logo="claro"
-            src="/img/logo-otavio-branco.png"
-            alt=""
-            aria-hidden="true"
-            width={299}
-            height={165}
-            loading="eager"
-            className="absolute inset-0 h-9 w-auto sm:h-10"
           />
         </a>
 

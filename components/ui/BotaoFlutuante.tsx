@@ -5,17 +5,21 @@ import { linkWhats } from "@/content/site";
 import { IconeWhatsApp } from "./Icones";
 
 /**
- * Só aparece depois que o CTA do hero sai de vista — não compete com ele nem
+ * Só aparece depois que a hero sai de vista — não compete com a marca nem
  * polui a primeira impressão.
+ *
+ * Observa a seção da hero, não um CTA dentro dela: a hero é a marca e o `<h1>`,
+ * e não tem botão. A intenção continua a mesma de quando tinha ("só depois do
+ * hero"), e agora não depende de um elemento que pode deixar de existir.
  */
 export function BotaoFlutuante() {
   const [visivel, setVisivel] = useState(false);
 
   useEffect(() => {
-    // `#hero-cta` é garantido pelo Hero, que está sempre na página. Se alguém
-    // removê-lo, o botão simplesmente não aparece — preferível a aparecer em
-    // cima do CTA principal.
-    const alvo = document.getElementById("hero-cta");
+    // `#topo` é a seção da hero, que está sempre na página. Se alguém a
+    // remover, o botão simplesmente não aparece — preferível a aparecer em
+    // cima da primeira tela.
+    const alvo = document.getElementById("topo");
     if (!alvo) return;
 
     const observador = new IntersectionObserver(

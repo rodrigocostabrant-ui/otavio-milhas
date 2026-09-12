@@ -46,9 +46,9 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    /* `suppressHydrationWarning` porque a hero escreve `data-hero-modo` e
-       `data-hero-fase` aqui num script inline, antes da hidratação — é o mesmo
-       padrão de um seletor de tema. O aviso é sobre exatamente esses atributos,
+    /* `suppressHydrationWarning` porque `AtivarAnimacoes` escreve
+       `data-anima` aqui num script inline, antes da hidratação — é o mesmo
+       padrão de um seletor de tema. O aviso é sobre exatamente esse atributo,
        e a supressão é rasa: vale para o <html> e não para a árvore abaixo. */
     <html
       lang="pt-BR"

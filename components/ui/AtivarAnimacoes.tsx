@@ -13,9 +13,6 @@
  *
  * O atributo é a permissão: `Reveal` só observa, e o CSS só esconde, quando ele
  * está escrito. Escrevê-lo é a prova de que existe JS vivo para desfazer.
- *
- * Mesmo padrão de `components/hero-video/capacidade.tsx`, e de propósito
- * separado dele: aquele decide a hero, este decide a página.
  */
 
 /**

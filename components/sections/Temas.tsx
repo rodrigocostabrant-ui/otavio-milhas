@@ -4,15 +4,25 @@ import { Reveal } from "@/components/ui/Reveal";
 import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
 import { Placeholder } from "@/components/ui/Placeholder";
 
+/**
+ * Os seis assuntos.
+ *
+ * Duas colunas, não três. Com três, cada assunto virava um cartão estreito com
+ * três linhas de texto e os seis liam como um grid de features — a terceira
+ * grade de três colunas seguida nesta página. Em duas, cada um tem largura de
+ * leitura de verdade e a lista lê como índice, que é o que ela é.
+ *
+ * Esta é a única seção da página sobre `--color-surface`. O branco puro aqui é
+ * deliberado e único: levanta o bloco que carrega a substância do que o Otávio
+ * ensina. Alternar superfície a cada seção, como antes, transformava o
+ * levantamento em listra e não levantava nada.
+ */
 export function Temas() {
   return (
-    <section id="como-funciona" className="border-t border-border/70 bg-surface">
-      <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
+    <section id="como-funciona" className="bg-surface">
+      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
         <Reveal>
-          <p className="rotulo text-accent-strong">{temasSecao.rotulo}</p>
-          <h2 className="mt-5 max-w-[26ch] font-display text-[clamp(1.75rem,4vw,2.75rem)] leading-[1.12] font-bold tracking-[-0.02em] text-balance">
-            {temasSecao.headline}
-          </h2>
+          <h2 className="titulo-secao max-w-[26ch]">{temasSecao.headline}</h2>
           <p className="mt-5 max-w-[58ch] text-[17px] leading-relaxed text-ink-muted">
             {temasSecao.sub}
           </p>
@@ -28,18 +38,15 @@ export function Temas() {
           </div>
         </Reveal>
 
-        <ul className="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-14 grid gap-x-14 gap-y-12 sm:grid-cols-2">
           {temas.map((tema, i) => (
             <li key={tema.numero}>
               <Reveal delay={Math.min(i * 0.04, 0.24)}>
-                <div className="flex items-center gap-3">
-                  <span className="rotulo text-accent">{tema.numero}</span>
-                  <span className="rastro-h w-8" aria-hidden="true" />
-                </div>
-                <h3 className="mt-4 font-display text-xl font-bold tracking-[-0.015em]">
+                <span className="rastro-h block w-10" aria-hidden="true" />
+                <h3 className="mt-5 font-display text-[1.35rem] leading-tight font-bold tracking-[-0.02em]">
                   {tema.titulo}
                 </h3>
-                <p className="mt-3 text-[16px] leading-relaxed text-ink-muted">
+                <p className="mt-3 max-w-[46ch] text-[16px] leading-relaxed text-ink-muted">
                   {tema.texto}
                 </p>
               </Reveal>
@@ -48,7 +55,7 @@ export function Temas() {
         </ul>
 
         <Reveal delay={0.1}>
-          <div className="mt-14">
+          <div className="mt-16">
             <WhatsAppLink contexto="temas">{temasSecao.cta}</WhatsAppLink>
           </div>
         </Reveal>

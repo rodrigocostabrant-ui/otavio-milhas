@@ -6,6 +6,10 @@ import { IconeWhatsApp } from "./Icones";
  *
  * Nenhuma variante usa `bg-accent` puro atrás de texto: branco sobre #FF5A00
  * dá 2.9:1 e reprova em AA. Botão preenchido é sempre `accent-strong`.
+ *
+ * `botao-tatil` é o afundar de 1px ao pressionar. Sem ele o botão só troca de
+ * cor, e trocar de cor é exatamente o que ele já faz no hover — o clique fica
+ * sem resposta própria. Ver `app/globals.css`.
  */
 
 const variantes = {
@@ -16,9 +20,15 @@ const variantes = {
   claro: "bg-ink-inverse text-accent-strong hover:bg-accent-soft",
 } as const;
 
+/**
+ * O tamanho grande encolhe no celular. Com `px-7 text-base` fixos, o rótulo
+ * mais longo da página ("Quero aprender a viajar com milhas") quebrava em duas
+ * linhas dentro da pílula a 400px — um botão de duas linhas lê como defeito,
+ * e o rótulo é copy verbatim que não se encurta.
+ */
 const tamanhos = {
   normal: "px-6 py-3 text-[15px]",
-  grande: "px-7 py-4 text-base",
+  grande: "px-5 py-3.5 text-[15px] sm:px-7 sm:py-4 sm:text-base",
 } as const;
 
 export function WhatsAppLink({
@@ -42,7 +52,7 @@ export function WhatsAppLink({
       /* O header imersivo repinta o contorno de branco: sobre a imagem,
          `accent-strong` é um laranja escuro demais para ser lido. */
       data-variante={variante}
-      className={`inline-flex items-center justify-center gap-2.5 rounded-full font-medium transition-colors duration-200 ${variantes[variante]} ${tamanhos[tamanho]} ${className}`}
+      className={`botao-tatil inline-flex items-center justify-center gap-2.5 rounded-full font-medium transition-colors duration-200 ${variantes[variante]} ${tamanhos[tamanho]} ${className}`}
     >
       <IconeWhatsApp className="h-[18px] w-[18px] shrink-0" />
       <span>{children}</span>

@@ -2,31 +2,36 @@ import { comeca } from "@/content/site";
 import { Reveal } from "@/components/ui/Reveal";
 import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
 
+/**
+ * Os três passos.
+ *
+ * Saíram as bolinhas com `01 / 02 / 03`. O conteúdo do passo já é o rótulo do
+ * passo, e uma numeração decorativa dentro de um círculo laranja é o desenho
+ * padrão de toda página que explica um processo — some a partir do momento em
+ * que a pessoa lê o primeiro título. O que ficou foi o rastro tracejado
+ * atravessando os três, que é vocabulário da marca e faz o trabalho de dizer
+ * "isto é uma sequência" sem gastar um número.
+ *
+ * A ordem continua semântica: é um `<ol>`, e leitor de tela numera sozinho.
+ */
 export function ComoComeca() {
   return (
-    <section className="border-t border-border/70">
-      <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
+    <section>
+      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
         <Reveal>
-          <p className="rotulo text-accent-strong">{comeca.rotulo}</p>
-          <h2 className="mt-5 max-w-[22ch] font-display text-[clamp(1.75rem,4vw,2.75rem)] leading-[1.12] font-bold tracking-[-0.02em] text-balance">
-            {comeca.headline}
-          </h2>
+          <h2 className="titulo-secao max-w-[22ch]">{comeca.headline}</h2>
         </Reveal>
 
-        <ol className="mt-12 grid gap-8 md:grid-cols-3 md:gap-6">
+        <ol className="mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
           {comeca.passos.map((passo, i) => (
-            <li key={passo.numero} className="relative">
+            <li key={passo.numero}>
               <Reveal delay={Math.min(i * 0.06, 0.24)}>
-                <div className="flex items-center gap-4">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-accent/50 bg-accent-soft font-display text-[15px] font-bold text-accent-strong">
-                    {passo.numero}
-                  </span>
-                  {/* Rastro conectando os passos: horizontal no desktop. */}
+                <div className="flex items-center gap-3" aria-hidden="true">
+                  <span className="h-2 w-2 shrink-0 rounded-full bg-accent" />
+                  {/* O rastro liga um passo ao seguinte; o último não liga a
+                      nada, então não recebe traço. */}
                   {i < comeca.passos.length - 1 ? (
-                    <span
-                      className="rastro-h hidden flex-1 md:block"
-                      aria-hidden="true"
-                    />
+                    <span className="rastro-h hidden flex-1 md:block" />
                   ) : null}
                 </div>
                 <h3 className="mt-5 font-display text-xl font-bold tracking-[-0.015em]">

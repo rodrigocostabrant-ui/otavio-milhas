@@ -8,8 +8,7 @@ import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
  * O conteúdo **nasce visível**. O estado escondido só existe sob
  * `data-anima="sim"`, que `AtivarAnimacoes` escreve antes do primeiro paint e
  * só quando há JS e movimento permitido — então quem não pode desfazer o
- * esconderijo nunca o recebe. É a mesma disciplina da hero em
- * `components/hero-video/capacidade.tsx`.
+ * esconderijo nunca o recebe.
  *
  * A versão anterior fazia o contrário: entregava `opacity: 0` no HTML do
  * servidor e contava com o JS para desfazer. Sem JS a página inteira sumia

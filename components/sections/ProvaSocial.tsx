@@ -11,7 +11,7 @@ import { Placeholder } from "@/components/ui/Placeholder";
  */
 export function ProvaSocial() {
   return (
-    <section className="border-t border-border/70">
+    <section>
       <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
         <Reveal>
           <p className="rotulo text-accent-strong">{provas.rotulo}</p>

@@ -2,7 +2,7 @@
  * Todo o conteúdo da página. Nenhuma string de texto mora em componente.
  * A fonte deste texto é copy.md — se divergir, copy.md é a verdade.
  */
-import { pendente, type Foto, type Talvez } from "./types";
+import { pendente, type Bandeira, type Foto, type Talvez } from "./types";
 
 /* ------------------------------------------------------------------ */
 /* WhatsApp — o único destino de conversão da página                   */
@@ -70,38 +70,64 @@ export const nav = [
 ] as const;
 
 /**
- * A primeira tela é só a marca: o logo e esta frase. Nada de subtítulo, selo ou
- * botão — quem chega vê uma coisa só, e a conversa começa na tela seguinte.
+ * A hero: uma tela só.
+ *
+ * Antes eram duas — a marca sozinha no off-white, e a foto sangrada escura
+ * logo abaixo. Duas telas cheias para dizer uma coisa, e a primeira sem
+ * nenhum caminho de conversa: quem chegava precisava rolar para achar o
+ * primeiro botão. Agora a marca vive no header (onde sempre esteve), a frase
+ * ocupa a coluna da esquerda e as fotos de viagem ocupam a direita, no deck.
+ *
+ * Toda a copy aqui já existia. `headline` é o título do site (o mesmo de
+ * `app/layout.tsx`), `apoio` e `cta` são verbatim da tela escura anterior, e
+ * `selo` é o número que o próprio Otávio publica. Nada foi escrito para
+ * preencher a tela.
  */
 export const hero = {
-  /** Verbatim do site atual. `destaque` fecha a frase em tinta cheia. */
-  headlineInicio: "Aprenda as melhores estratégias para acumular milhas, viajar mais, ",
-  headlineDestaque: "gastando menos.",
-} as const;
-
-/**
- * A segunda tela da hero: a que a câmera revela por dentro do avião.
- *
- * É onde o Otávio aparece. Isso é a decisão §5 do AGENTS.md levada ao extremo —
- * não há depoimento nem print de resgate, então a autoridade dele *é* a prova
- * social, e ela chega antes de qualquer argumento.
- *
- * Toda a copy aqui já existia: a frase é verbatim do site dele e o apoio é o
- * número que ele mesmo publica. Nada foi inventado para preencher a tela.
- */
-export const heroFoto = {
-  /** O fundo sangrado desta tela. Foto de viagem, não retrato — é a mesma que
-   *  o Otávio usa lá embaixo em "Quem é o Otávio" (`otavio.fotoViagem`) faria
-   *  sentido reaproveitar, mas o Rodrigo tem fotos de viagem suficientes para
-   *  a hero merecer a dela própria. */
-  foto: pendente(
-    "Foto de viagem para o topo da página",
-    "Rodrigo tem as fotos",
-  ) as Talvez<Foto>,
-  headline:
+  /** O selo com o ponto pulsante. Carrega a autoridade antes da promessa. */
+  selo: "+5 milhões de milhas negociadas desde 2021",
+  headline: "Viaje mais, gastando menos.",
+  apoio:
     "Aprenda com quem já percorreu vários países sem gastar uma fortuna em passagens aéreas.",
-  apoio: "Mais de 5 milhões de milhas negociadas desde 2021.",
+  /** A linha em laranja, logo abaixo do apoio. É `marca.descricao`: curta o
+   *  bastante para o acento não virar um parágrafo colorido. */
+  linha: marca.descricao,
   cta: "Quero aprender a viajar com milhas",
+  ctaSecundario: "Como funciona",
+  ctaSecundarioHref: "#como-funciona",
+  /** Instrução do deck. Só lida por leitor de tela e pelo `title` do trilho. */
+  instrucaoDeck: "Arraste para percorrer as fotos de viagem",
+  /**
+   * As bandeiras que flutuam ao redor da hero.
+   *
+   * Pendente, e este é um caso em que o marcador NÃO aparece na tela: a
+   * decoração não é conteúdo, e uma moldura tracejada boiando em volta do
+   * `<h1>` seria absurda. Enquanto não houver lista, `BandeirasDecorativas`
+   * desenha o avião e o rastro do próprio logo — vocabulário que já existe na
+   * página e não afirma nada sobre país nenhum.
+   *
+   * A lista não se inventa: o site do Otávio diz apenas "vários países", e
+   * escolher seis bandeiras seria afirmar seis viagens que ninguém confirmou.
+   * Ver `otavio.paises`, pendente pelo mesmo motivo.
+   */
+  bandeiras: pendente(
+    "Países que o Otávio conheceu",
+    "o site dele diz apenas “vários países”; sem a lista, a hero decora com o avião e o rastro da marca",
+  ) as Talvez<readonly Bandeira[]>,
+  /**
+   * As fotos do deck. Seis porque abaixo disso o giro fecha rápido demais e
+   * acima disso metade nunca chega à frente. Enquanto não chegam, cada uma
+   * rende uma moldura tracejada — o layout já é o definitivo e o dia em que o
+   * Rodrigo entregar as fotos é uma troca de valor aqui, não um redesenho.
+   */
+  fotos: [
+    pendente("Foto de viagem 1", "Rodrigo tem as fotos"),
+    pendente("Foto de viagem 2", "Rodrigo tem as fotos"),
+    pendente("Foto de viagem 3", "Rodrigo tem as fotos"),
+    pendente("Foto de viagem 4", "Rodrigo tem as fotos"),
+    pendente("Foto de viagem 5", "Rodrigo tem as fotos"),
+    pendente("Foto de viagem 6", "Rodrigo tem as fotos"),
+  ] as readonly Talvez<Foto>[],
 } as const;
 
 export const virada = {

@@ -8,11 +8,10 @@ import { IconeMais } from "@/components/ui/Icones";
  */
 export function FAQ() {
   return (
-    <section id="duvidas" className="border-t border-border/70 bg-surface">
+    <section id="duvidas">
       <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8 sm:py-24">
         <Reveal>
-          <p className="rotulo text-accent-strong">{faqSecao.rotulo}</p>
-          <h2 className="mt-5 font-display text-[clamp(1.75rem,4vw,2.5rem)] leading-[1.12] font-bold tracking-[-0.02em] text-balance">
+          <h2 className="mt-5 titulo-secao">
             {faqSecao.headline}
           </h2>
         </Reveal>

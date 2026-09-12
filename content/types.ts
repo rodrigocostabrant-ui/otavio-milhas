@@ -42,3 +42,15 @@ export type Foto = {
 
 /** Protótipo ligado por padrão. `NEXT_PUBLIC_PROTOTIPO=false` proíbe marcadores. */
 export const MODO_PROTOTIPO = process.env.NEXT_PUBLIC_PROTOTIPO !== "false";
+
+/**
+ * Uma bandeira decorativa da hero.
+ *
+ * `src` aponta para um SVG em `public/img/bandeiras/`. Não há lista até o
+ * Otávio confirmar quais países ele de fato conheceu — o site dele diz apenas
+ * "vários países", e inventar seis nomes seria inventar conteúdo.
+ */
+export type Bandeira = {
+  readonly pais: string;
+  readonly src: string;
+};

@@ -18,7 +18,7 @@ export function CTAFinal() {
             <span className="rastro-h w-16 opacity-70" />
           </div>
 
-          <h2 className="mx-auto mt-8 max-w-[20ch] font-display text-[clamp(1.85rem,4.6vw,3rem)] leading-[1.1] font-bold tracking-[-0.02em] text-balance">
+          <h2 className="mx-auto mt-8 max-w-[20ch] titulo-ancora">
             {ctaFinal.headline}
           </h2>
 

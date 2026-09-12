@@ -1,50 +1,65 @@
 import { paraQuem } from "@/content/site";
 import { Reveal } from "@/components/ui/Reveal";
-import { IconeCheck, IconeMenos } from "@/components/ui/Icones";
 
+/**
+ * A seção da honestidade.
+ *
+ * Era duas colunas com check verde de um lado e menos cinza do outro — o mesmo
+ * layout, os mesmos dois ícones e o mesmo gesto retórico de `ViradaDeChave`,
+ * três seções acima. Lidas em sequência, a segunda soava como preenchimento da
+ * primeira.
+ *
+ * Agora é uma coluna de leitura, em duas listas empilhadas separadas por um
+ * filete, sem ícone nenhum. É a seção em que o Otávio diz para quem isto não
+ * serve; ela ganha lendo como texto corrido honesto e perdendo quando vira
+ * grade de marketing.
+ */
 export function ParaQuem() {
   return (
-    <section className="border-t border-border/70 bg-surface">
-      <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
+    <section>
+      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
         <Reveal>
-          <p className="rotulo text-accent-strong">{paraQuem.rotulo}</p>
-          <h2 className="mt-5 max-w-[24ch] font-display text-[clamp(1.75rem,4vw,2.75rem)] leading-[1.12] font-bold tracking-[-0.02em] text-balance">
-            {paraQuem.headline}
-          </h2>
+          <h2 className="titulo-secao max-w-[24ch]">{paraQuem.headline}</h2>
         </Reveal>
 
-        <div className="mt-12 grid gap-10 md:grid-cols-2 md:gap-14">
-          <Reveal>
+        <Reveal delay={0.06}>
+          <div className="mt-12 max-w-[62ch]">
             <h3 className="font-display text-xl font-bold tracking-[-0.015em]">
               {paraQuem.sim.titulo}
             </h3>
-            <ul className="mt-6 space-y-4">
+            <ul className="mt-5 space-y-3">
               {paraQuem.sim.itens.map((item) => (
-                <li key={item} className="flex gap-3 text-[16px] leading-relaxed text-ink-soft">
-                  <IconeCheck className="mt-[5px] h-4 w-4 shrink-0 text-accent-strong" />
-                  <span>{item}</span>
+                <li
+                  key={item}
+                  className="text-[17px] leading-relaxed text-ink-soft"
+                >
+                  {item}
                 </li>
               ))}
             </ul>
-          </Reveal>
+          </div>
+        </Reveal>
 
-          <Reveal delay={0.08}>
+        <Reveal delay={0.1}>
+          <div className="mt-12 max-w-[62ch] border-t border-border pt-12">
             <h3 className="font-display text-xl font-bold tracking-[-0.015em] text-ink-muted">
               {paraQuem.nao.titulo}
             </h3>
-            <ul className="mt-6 space-y-4">
+            <ul className="mt-5 space-y-3">
               {paraQuem.nao.itens.map((item) => (
-                <li key={item} className="flex gap-3 text-[16px] leading-relaxed text-ink-muted">
-                  <IconeMenos className="mt-[7px] h-4 w-4 shrink-0 text-ink-muted/50" />
-                  <span>{item}</span>
+                <li
+                  key={item}
+                  className="text-[17px] leading-relaxed text-ink-muted"
+                >
+                  {item}
                 </li>
               ))}
             </ul>
-          </Reveal>
-        </div>
+          </div>
+        </Reveal>
 
-        <Reveal delay={0.12}>
-          <p className="mt-12 text-[17px] leading-relaxed text-ink-muted">
+        <Reveal delay={0.14}>
+          <p className="mt-12 border-l-2 border-accent pl-5 font-display text-[clamp(1.1rem,2.2vw,1.4rem)] leading-snug font-semibold tracking-[-0.015em] text-balance">
             {paraQuem.fecho}
           </p>
         </Reveal>

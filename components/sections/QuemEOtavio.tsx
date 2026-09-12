@@ -5,7 +5,7 @@ import { Dado } from "@/components/ui/Placeholder";
 
 export function QuemEOtavio() {
   return (
-    <section id="quem-e" className="border-t border-border/70">
+    <section id="quem-e">
       <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:gap-14">
           <Reveal className="lg:sticky lg:top-24 lg:self-start">
@@ -19,7 +19,7 @@ export function QuemEOtavio() {
 
           <Reveal delay={0.06}>
             <p className="rotulo text-accent-strong">{otavio.rotulo}</p>
-            <h2 className="mt-5 max-w-[20ch] font-display text-[clamp(1.75rem,4vw,2.75rem)] leading-[1.12] font-bold tracking-[-0.02em] text-balance">
+            <h2 className="mt-5 max-w-[20ch] titulo-ancora">
               {otavio.headline}
             </h2>
 
