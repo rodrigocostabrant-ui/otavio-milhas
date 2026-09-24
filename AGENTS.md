@@ -22,12 +22,14 @@ Estas decisões não se reabrem sem conversa explícita com o Rodrigo.
 2. **WhatsApp é o único destino de conversão** (`https://wa.me/5531999618080`).
    Sem formulário, sem captura de e-mail, sem checkout. Toda mensagem é
    pré-preenchida por contexto em `content/site.ts`.
-3. **Variante visual: Contemporânea clara.** Fundo off-white, muito respiro,
-   laranja como única cor de destaque, fotografia de viagem real e grande.
-4. **`#FF5A00` (`--color-accent`) nunca carrega texto pequeno.** Branco sobre ele
-   dá 2.9:1 e reprova em AA. Botão preenchido usa `--color-accent-strong`
-   (`#C2410C`, 4.9:1), hover `--color-accent-hover`. O laranja puro vive em
-   traço, ícone, o avião, o rastro tracejado e sobre `bg-ink`.
+3. **Variante visual: Preto/prata/grafite** (substituiu a "Contemporânea clara"
+   em 24/09/2026, com o Rodrigo — ver §Identidade preto/prata abaixo). Fundo
+   escuro, muito respiro, prata metálico como única cor de destaque,
+   fotografia de viagem real e grande.
+4. **Nenhum botão preenchido carrega texto que não passe AA.** `--color-ink`
+   (o preto mais profundo da escala) é sempre o texto por cima de
+   `--color-accent-strong` ou `--color-ink-inverse` — nunca uma cor clara sobre
+   outra clara. Ver a nota em `app/globals.css` e `components/ui/WhatsAppLink.tsx`.
 5. **Espinha narrativa: autoridade cedo.** "Quem é o Otávio" é a terceira seção,
    não a sexta. A oferta é conversar com uma pessoa, e como não há depoimento
    nem print de resgate, ele é a prova social.
@@ -111,7 +113,7 @@ mesma intenção, e o botão do WhatsApp está uma tela acima). O trabalho da se
 
 - **No máximo 3 rótulos de seção na página inteira.** Hoje: o selo da hero,
   "Quem vai te ensinar" e "Quem já viajou com isso". Eram sete, um por seção, e
-  sete etiquetas iguais em caixa alta laranja produzem ritmo de template.
+  sete etiquetas iguais em caixa alta produzem ritmo de template.
 - **Três degraus de título, não um.** `titulo-ancora` para as seções que
   carregam o argumento, `titulo-secao` para as que detalham, e o `<h1>` acima
   das duas. Antes todo `<h2>` usava o mesmo tamanho, e oito seções do mesmo
@@ -119,6 +121,36 @@ mesma intenção, e o botão do WhatsApp está uma tela acima). O trabalho da se
 - **Sem listras.** A página roda sobre `--color-bg`; o que separa as seções é o
   respiro, não um `border-t` no topo de cada uma. `--color-surface` aparece uma
   vez só, em "Os assuntos".
+
+## Identidade preto/prata (decidido em 24/09/2026, com o Rodrigo)
+
+A variante "Contemporânea clara" (fundo off-white, laranja como único
+destaque) foi substituída por uma identidade preta/prata/grafite, a pedido do
+Rodrigo — luxo, sofisticação e "design automotivo de luxo" em vez do tom claro
+e caloroso original. A troca é só de tokens em `app/globals.css`; estrutura,
+copy, layout, animações e a lógica de cada seção não mudaram.
+
+**O que ficou de fora da troca, de propósito.** Logo, ícone da aba e imagem de
+compartilhamento continuam laranja — estavam na lista de "preservar" do
+Rodrigo, e o logo (`public/img/logo-otavio.png`) já é transparente, então o
+laranja da marca lê bem tanto sobre o header escuro quanto sobre o antigo
+off-white. Não é inconsistência: é a única cor que continua sendo a marca, e
+todo o resto da página virou neutro ao redor dela.
+
+**A escala tem três pretos, não um.** `--color-ink` (o mais profundo, ~2% de
+luminância) ficou reservado às três seções de impacto que já usavam `bg-ink`
+— Footer, FaixaViagem, CTAFinal — e nunca mais é texto. `--color-bg` (a página)
+e `--color-surface` ("Os assuntos", os cartões do deck) são dois tons acima
+disso, nessa ordem, para não virar "um bloco preto uniforme".
+
+**A colisão que isso força.** Com a página inteira escura, `--color-accent-strong`
+precisou virar claro (prata), porque é a cor de texto/ícone que aparece direto
+sobre o fundo da página na maioria das seções (rótulos, ícones, o botão de
+contorno do header). Isso inverteu o papel dele: onde antes um botão preenchido
+escrevia com `--color-ink-inverse` por cima (claro sobre um preenchimento
+escuro), agora escreve com `--color-ink` (escuro sobre um preenchimento claro).
+Mexer nessa dupla sem entender por que ela existe reintroduz texto invisível —
+ver a nota no topo de `app/globals.css` e em `components/ui/WhatsAppLink.tsx`.
 
 ## Regras de código
 

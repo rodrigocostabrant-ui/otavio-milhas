@@ -17,8 +17,8 @@ export function Header() {
           className="relative shrink-0"
           aria-label={`${marca.nome} — início`}
         >
-          {/* Um logo só: o fundo atrás do header é sempre o off-white da
-              página — não há mais imagem escura passando por baixo dele. */}
+          {/* Um logo só: o fundo atrás do header é sempre o mesmo `--color-bg`
+              da página — não há mais imagem escura passando por baixo dele. */}
           <Image
             src="/img/logo-otavio.png"
             alt={marca.nome}
@@ -35,7 +35,7 @@ export function Header() {
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="text-[15px] text-ink-muted transition-colors duration-200 hover:text-ink"
+                  className="text-[15px] text-ink-muted transition-colors duration-200 hover:text-ink-inverse"
                 >
                   {item.rotulo}
                 </a>

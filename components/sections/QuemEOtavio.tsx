@@ -58,7 +58,7 @@ export function QuemEOtavio() {
             </dl>
 
             <p className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-[15px] text-ink-muted">
-              <span className="font-medium text-ink">{marca.primeiroNome}</span>
+              <span className="font-medium text-ink-inverse">{marca.primeiroNome}</span>
               <Dado valor={marca.nomeCompleto} />
               <span className="rastro-h w-10" aria-hidden="true" />
               <Dado valor={marca.cidade} />
