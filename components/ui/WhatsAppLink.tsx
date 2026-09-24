@@ -4,9 +4,8 @@ import { IconeWhatsApp } from "./Icones";
 /**
  * O único destino de conversão da página.
  *
- * `accent-strong` e `ink-inverse` são as duas cores claras da escala — todo
- * botão preenchido com uma delas por baixo escreve com `--color-ink` (escuro)
- * por cima, nunca uma cor clara sobre outra clara.
+ * `accent-strong` é escuro o bastante para carregar texto claro por cima
+ * (`ink-inverse`, 4.5:1+). Botão preenchido é sempre `accent-strong`.
  *
  * `botao-tatil` é o afundar de 1px ao pressionar. Sem ele o botão só troca de
  * cor, e trocar de cor é exatamente o que ele já faz no hover — o clique fica
@@ -15,10 +14,10 @@ import { IconeWhatsApp } from "./Icones";
 
 const variantes = {
   solido:
-    "bg-accent-strong text-ink hover:bg-accent-hover shadow-[0_1px_2px_rgba(28,27,26,0.08)]",
+    "bg-accent-strong text-ink-inverse hover:bg-accent-hover shadow-[0_1px_2px_rgba(28,27,26,0.08)]",
   contorno:
     "border border-accent/60 text-accent-strong hover:bg-accent-soft hover:border-accent",
-  claro: "bg-ink-inverse text-ink hover:bg-accent-hover",
+  claro: "bg-ink-inverse text-accent-strong hover:bg-accent-soft",
 } as const;
 
 /**

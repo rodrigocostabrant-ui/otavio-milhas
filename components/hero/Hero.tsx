@@ -84,7 +84,7 @@ export function Hero() {
 
             <a
               href={hero.ctaSecundarioHref}
-              className="botao-tatil group/secundario inline-flex items-center justify-center gap-2 rounded-full border border-border px-6 py-4 text-base font-medium text-ink-soft transition-colors duration-200 hover:border-ink-inverse/25 hover:text-ink-inverse"
+              className="botao-tatil group/secundario inline-flex items-center justify-center gap-2 rounded-full border border-border px-6 py-4 text-base font-medium text-ink-soft transition-colors duration-200 hover:border-ink/25 hover:text-ink"
             >
               {hero.ctaSecundario}
               <IconeSeta className="h-4 w-4 text-accent-strong transition-transform duration-200 group-hover/secundario:translate-x-0.5" />

@@ -94,7 +94,7 @@ export function BotaoMagneticoWhatsApp({
         href={linkWhats(contexto)}
         target="_blank"
         rel="noopener noreferrer"
-        className="botao-tatil inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-accent-strong px-5 py-3.5 text-[15px] font-medium text-ink shadow-[0_1px_2px_rgba(28,27,26,0.08)] transition-colors duration-200 hover:bg-accent-hover sm:px-7 sm:py-4 sm:text-base"
+        className="botao-tatil inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-accent-strong px-5 py-3.5 text-[15px] font-medium text-ink-inverse shadow-[0_1px_2px_rgba(28,27,26,0.08)] transition-colors duration-200 hover:bg-accent-hover sm:px-7 sm:py-4 sm:text-base"
       >
         <IconeWhatsApp className="h-[18px] w-[18px] shrink-0" />
         <span>{children}</span>

@@ -4,8 +4,8 @@ import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
 import { IconeAviao } from "@/components/ui/Icones";
 
 /**
- * Sobre `bg-ink`, o preto mais profundo da escala, o `accent` puro (prata)
- * ainda lê bem como ícone — o mesmo par que aparece no conector dos passos.
+ * Sobre `bg-ink`, o `accent` puro (prata) lê bem como ícone — o mesmo par
+ * que aparece no conector dos passos.
  */
 export function CTAFinal() {
   return (

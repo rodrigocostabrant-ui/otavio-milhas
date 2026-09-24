@@ -6,30 +6,34 @@
  * Nomeados por papel, nunca por cor. Nenhum componente escreve cor literal.
  * Ver docs/superpowers/specs/2026-09-09-landing-otavio-milhas-design.md §5.
  *
- * Identidade preto/prata/grafite (decidida com o Rodrigo em 24/09/2026,
- * substituindo a variante "Contemporânea clara" — ver AGENTS.md). A página
- * inteira passou a rodar sobre fundo escuro; `--color-ink` deixou de ser texto
- * e virou o preto mais profundo da escala, reservado às três seções de
- * impacto (Footer, FaixaViagem, CTAFinal) que já usavam `bg-ink`.
+ * Identidade cinza/prata sobre fundo claro (revisada com o Rodrigo em
+ * 24/09/2026, a partir de um mockup do Claude Design — ver AGENTS.md). A
+ * primeira tentativa desse mesmo pedido tinha ido para um tema escuro; esta
+ * troca de volta para fundo claro é a segunda leitura de "preto, prata e
+ * cinza", com grafite/prata no lugar do laranja original.
  *
- * REGRA DURA (mantida): nenhum botão preenchido carrega texto que não passe
- * AA. `--color-accent-strong` é claro o bastante para ser texto sobre o fundo
- * escuro da página, e por isso todo botão que o usa como `bg-*` escreve com
- * `--color-ink` por cima (texto escuro sobre prata), nunca com
- * `--color-ink-inverse`. Ver `components/ui/WhatsAppLink.tsx`.
+ * `--color-ink` volta a ter o papel duplo original: é o texto por cima do
+ * fundo claro E o preto das três seções de impacto (Footer, FaixaViagem,
+ * CTAFinal) que usam `bg-ink` — os dois papéis coexistem porque a página é
+ * majoritariamente clara de novo.
+ *
+ * REGRA DURA: nenhum botão preenchido carrega texto que não passe AA.
+ * `--color-accent-strong` é escuro o bastante para ser fundo de botão com
+ * `--color-ink-inverse` (claro) por cima — nunca uma cor clara sobre outra
+ * clara. Ver `components/ui/WhatsAppLink.tsx`.
  */
 @theme {
-  --color-bg: #0a0a0b;
-  --color-surface: #18191d;
-  --color-border: #2e3035;
-  --color-ink: #050506;
-  --color-ink-soft: #d6d8db;
-  --color-ink-muted: #999da3;
-  --color-accent: #aeb2b8;
-  --color-accent-strong: #d4d6da;
-  --color-accent-hover: #bcbfc4;
-  --color-accent-soft: #1e2024;
-  --color-ink-inverse: #f2f3f4;
+  --color-bg: #f3f3f2;
+  --color-surface: #eef0f1;
+  --color-border: #d6d8da;
+  --color-ink: #0e0f11;
+  --color-ink-soft: #4a4d53;
+  --color-ink-muted: #5d6168;
+  --color-accent: #a3a7ad;
+  --color-accent-strong: #2b2d31;
+  --color-accent-hover: #1b1c1f;
+  --color-accent-soft: #e6e8ea;
+  --color-ink-inverse: #f5f5f4;
 
   --font-display: var(--fonte-display), ui-sans-serif, system-ui, sans-serif;
   --font-corpo: var(--fonte-corpo), ui-sans-serif, system-ui, sans-serif;
@@ -49,7 +53,7 @@
 
   body {
     background-color: var(--color-bg);
-    color: var(--color-ink-inverse);
+    color: var(--color-ink);
     font-family: var(--font-corpo);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;

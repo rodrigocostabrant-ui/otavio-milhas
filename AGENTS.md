@@ -22,14 +22,15 @@ Estas decisões não se reabrem sem conversa explícita com o Rodrigo.
 2. **WhatsApp é o único destino de conversão** (`https://wa.me/5531999618080`).
    Sem formulário, sem captura de e-mail, sem checkout. Toda mensagem é
    pré-preenchida por contexto em `content/site.ts`.
-3. **Variante visual: Preto/prata/grafite** (substituiu a "Contemporânea clara"
-   em 24/09/2026, com o Rodrigo — ver §Identidade preto/prata abaixo). Fundo
-   escuro, muito respiro, prata metálico como única cor de destaque,
+3. **Variante visual: Cinza/prata sobre fundo claro** (substituiu a
+   "Contemporânea clara" laranja em 24/09/2026, revisada no mesmo dia a partir
+   de um mockup do Claude Design — ver §Identidade preto/prata abaixo). Fundo
+   off-white, muito respiro, grafite/prata como única cor de destaque,
    fotografia de viagem real e grande.
-4. **Nenhum botão preenchido carrega texto que não passe AA.** `--color-ink`
-   (o preto mais profundo da escala) é sempre o texto por cima de
-   `--color-accent-strong` ou `--color-ink-inverse` — nunca uma cor clara sobre
-   outra clara. Ver a nota em `app/globals.css` e `components/ui/WhatsAppLink.tsx`.
+4. **Nenhum botão preenchido carrega texto que não passe AA.**
+   `--color-accent-strong` é escuro o bastante para ser fundo de botão com
+   `--color-ink-inverse` (claro) por cima — nunca uma cor clara sobre outra
+   clara. Ver a nota em `app/globals.css` e `components/ui/WhatsAppLink.tsx`.
 5. **Espinha narrativa: autoridade cedo.** "Quem é o Otávio" é a terceira seção,
    não a sexta. A oferta é conversar com uma pessoa, e como não há depoimento
    nem print de resgate, ele é a prova social.
@@ -124,33 +125,42 @@ mesma intenção, e o botão do WhatsApp está uma tela acima). O trabalho da se
 
 ## Identidade preto/prata (decidido em 24/09/2026, com o Rodrigo)
 
-A variante "Contemporânea clara" (fundo off-white, laranja como único
-destaque) foi substituída por uma identidade preta/prata/grafite, a pedido do
-Rodrigo — luxo, sofisticação e "design automotivo de luxo" em vez do tom claro
-e caloroso original. A troca é só de tokens em `app/globals.css`; estrutura,
-copy, layout, animações e a lógica de cada seção não mudaram.
+A variante "Contemporânea clara" original (fundo off-white, laranja como único
+destaque) saiu de cena a pedido do Rodrigo — laranja fora, "luxo, sofisticação,
+design automotivo" no lugar. Essa troca teve duas leituras no mesmo dia:
+
+1. Uma primeira tentativa foi para um **tema escuro** (fundo preto, texto
+   claro, prata como detalhe) — chegou a ir ao ar em produção.
+2. O Rodrigo então rodou a mesma referência pelo Claude Design, que devolveu
+   um mockup **claro** (fundo off-white, cartões cinza-prata, só a faixa de CTA
+   final em preto) e pediu para aplicar essa leitura no lugar da escura — a
+   que vale hoje.
+
+A troca é só de tokens em `app/globals.css` (e os handful de pontos onde um
+token de texto precisa saber se o fundo por baixo é claro ou escuro);
+estrutura, copy, layout, animações e a lógica de cada seção não mudaram. O
+mockup do Claude Design também trazia um gradiente sutil próprio por seção e
+um "cartão vencedor" preto na comparação de "A virada de chave" — isso ficou
+de fora de propósito: contradiz a regra de "sem listras" (§Ritmo da página) e
+o design system de tokens únicos deste projeto, então a troca ficou só na cor.
 
 **O que ficou de fora da troca, de propósito.** Logo, ícone da aba e imagem de
 compartilhamento continuam laranja — estavam na lista de "preservar" do
 Rodrigo, e o logo (`public/img/logo-otavio.png`) já é transparente, então o
-laranja da marca lê bem tanto sobre o header escuro quanto sobre o antigo
-off-white. Não é inconsistência: é a única cor que continua sendo a marca, e
-todo o resto da página virou neutro ao redor dela.
+laranja da marca lê bem tanto sobre o header claro quanto sobre um eventual
+fundo escuro. Não é inconsistência: é a única cor que continua sendo a marca,
+e todo o resto da página é neutro ao redor dela.
 
-**A escala tem três pretos, não um.** `--color-ink` (o mais profundo, ~2% de
-luminância) ficou reservado às três seções de impacto que já usavam `bg-ink`
-— Footer, FaixaViagem, CTAFinal — e nunca mais é texto. `--color-bg` (a página)
-e `--color-surface` ("Os assuntos", os cartões do deck) são dois tons acima
-disso, nessa ordem, para não virar "um bloco preto uniforme".
-
-**A colisão que isso força.** Com a página inteira escura, `--color-accent-strong`
-precisou virar claro (prata), porque é a cor de texto/ícone que aparece direto
-sobre o fundo da página na maioria das seções (rótulos, ícones, o botão de
-contorno do header). Isso inverteu o papel dele: onde antes um botão preenchido
-escrevia com `--color-ink-inverse` por cima (claro sobre um preenchimento
-escuro), agora escreve com `--color-ink` (escuro sobre um preenchimento claro).
-Mexer nessa dupla sem entender por que ela existe reintroduz texto invisível —
-ver a nota no topo de `app/globals.css` e em `components/ui/WhatsAppLink.tsx`.
+**`--color-ink` mantém o papel duplo original.** É o texto por cima do fundo
+claro da página E o preto das três seções de impacto que usam `bg-ink`
+(Footer, FaixaViagem, CTAFinal) — os dois papéis coexistem sem colisão porque
+a página é majoritariamente clara, do jeito que o design original já previa.
+Isso só quebra se a página virar majoritariamente escura de novo (foi
+exatamente o que aconteceu na tentativa 1) — nesse caso `--color-accent-strong`
+precisa virar claro, porque passa a ser a cor de texto/ícone direto sobre o
+fundo da página, e todo botão preenchido com ele por baixo precisa trocar o
+texto de `--color-ink-inverse` para `--color-ink`. Ver a nota no topo de
+`app/globals.css` e em `components/ui/WhatsAppLink.tsx` antes de mexer nisso.
 
 ## Regras de código
 

@@ -39,7 +39,7 @@ export function BotaoFlutuante() {
       aria-label="Falar com o Otávio no WhatsApp"
       aria-hidden={!visivel}
       tabIndex={visivel ? 0 : -1}
-      className={`fixed right-5 bottom-5 z-40 inline-flex h-14 w-14 items-center justify-center rounded-full bg-accent-strong text-ink shadow-lg transition-[opacity,transform] duration-200 hover:bg-accent-hover ${
+      className={`fixed right-5 bottom-5 z-40 inline-flex h-14 w-14 items-center justify-center rounded-full bg-accent-strong text-ink-inverse shadow-lg transition-[opacity,transform] duration-200 hover:bg-accent-hover ${
         visivel
           ? "pointer-events-auto translate-y-0 opacity-100"
           : "pointer-events-none translate-y-3 opacity-0"
